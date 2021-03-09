@@ -41,11 +41,13 @@ In our case, we can define four inputs in cells C2 to C5 as:
 =ModuleInput("Projectile", A2:C8, "Time", 0.5)
 ```
 
-Our module will thus be called "Projectile", its structure and formulas is defined in the range $A$2:$C$8. The names of the inputs are descriptive, and we'll refer to them when we will use the model. The initial values will be displayed as a result of ModuleInput() function and we can use it while constructing the module. 
+Our module will thus be called "Projectile", its structure and formulas are defined in the range $A$2:$C$8. The names of the inputs are descriptive, and we'll refer to them when we will use the model. The initial values will be displayed in cells with ModuleInput() functions as their result; we can conveniently use them while constructing the module. 
 
 ![Projectile model](/images/projectile2.png)
 
-We used absolute references for module range $A$2:$C$8 to simplify copying the formula from cell C2 to cell C5. Since we have module argument names already nicely written in cells A2..A5, we used these as input names. Similarly, we took values from cells B2..B5 to be initial input values for our module.
+As it can be seen in the picture above, we used absolute references for module range $A$2:$C$8 to simplify copying the formula from cell C2 to cells C3..C5. Since we have module argument names already nicely written in cells A2..A5, we used these as input names. Similarly, we took values from cells B2..B5 to be initial input values for our module.
+
+In this way, we defined module "Projectile" with four input arguments.
 
 ### How to define module outputs
 
