@@ -22,24 +22,24 @@ We would like to use this model in other workbooks, but just its calculation "se
 
 The model will take four arguments - initial speed, angle and altitude, and the time after lounch for which we are estimating the position. We define each of the four inputs with  function ModuleInput() which looks like:
 
-'=ModuleInput(module_name, module_range, input_name, input_initial_value)'
+`=ModuleInput(module_name, module_range, input_name, input_initial_value)`
 
-'module_name' is a name for our module. Since we can have many modules (many sheet defined functions), it is essential that we distinguish them by unique names. 
+`module_name` is a name for our module. Since we can have many modules (many sheet defined functions), it is essential that we distinguish them by unique names. 
 
-'module_range' is a range of cells where the module is defined. 
+`module_range` is a range of cells where the module is defined. 
 
-'input_name' is the name of the input argument.
+`input_name` is the name of the input argument.
 
-'input_initial_value' is the initial value for the input argument. This value will be used by our model while we are developing its inner structure and formulas. When the model is used, this value is ignored.
+`input_initial_value` is the initial value for the input argument. This value will be used by our model while we are developing its inner structure and formulas. When the model is used, this value is ignored.
 
 In our case, we can define four inputs in cells C2 to C5 as:
 
-'''
+```
 =ModuleInput("Projectile", A2:C8, "Initial speed", 130)
 =ModuleInput("Projectile", A2:C8, "Initial angle", 25)
 =ModuleInput("Projectile", A2:C8, "Initial altitude", 0)
 =ModuleInput("Projectile", A2:C8, "Time", 0.5)
-''' 
+```
 
 Our module will thus be called "Projectile", its structure and formulas is defined in the range $A$2:$C$8. The names of the inputs are descriptive, and we'll refer to them when we will use the model. The initial values will be displayed as a result of ModuleInput() function and we can use it while constructing the module. 
 
@@ -51,20 +51,20 @@ We used absolute references for module range $A$2:$C$8 to simplify copying the f
 
 For the outputs (result values) we use function ModuleOutput() - one function for a given output:
 
-'=ModuleOutput(module_name, output_name, output_value)'
+`=ModuleOutput(module_name, output_name, output_value)`
 
-'module_name' is a name for our module. 
+`module_name` is a name for our module. 
 
-'output_name' is the name of the output.
+`output_name` is the name of the output.
 
-'output_value' is the value which will be returned to the caller.
+`output_value` is the value which will be returned to the caller.
 
 For our projectile, we can define two outputs (distance and altitude) in cells C7 and C8 like
 
-'''
+```
 =ModuleOutput("Projectile", "Distance", B7)
 =ModuleOutput("Projectile", "Altitude", B8)
-''' 
+``` 
 
 In this way, when we will call the module to get the 'distance' as a result, it will return the estimated value from cell B7, where the formula for distance is entered.
 
