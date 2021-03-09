@@ -61,15 +61,13 @@ For our projectile, we can define two outputs (distance and altitude) in cells C
 ```
 =ModuleOutput("Projectile", "Distance", B7)
 =ModuleOutput("Projectile", "Altitude", B8)
-``` 
+```
 
 In this way, when we will call the module to get the "Distance" as a result, it will return the estimated value from cell B7, where the formula for distance is entered. The "Altitude" will work in the same way.
 
 ![Projectile model](/images/projectile3.png)
 
-Similar as above, we can use other cells to define names (e.g. in cells A7 we have names of model ouputs).
-
-**Please note that we changed the model expressions in cells B7 and B8 to use input parameters from cells C2, C3, C4 and C5. These cells are regarded as input "slots" into our "Projectile" module, and expressions in cells B7 and B8 will take these parameters to calculate the results. We defined these input slots by using function ModuleInput() in them.**
+Similar as above, we can use other cells to define names (e.g. in cells A7 we have references to cells A7 and A8 with names of model ouputs).
 
 ### How to use the module
 
