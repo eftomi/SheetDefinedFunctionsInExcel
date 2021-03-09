@@ -8,7 +8,7 @@ Instead of coding a VBA function or constructing a complex lambda expression, yo
 
 Sheet defined function can take input parameters, recalculate itself and return the results. Your model, once exposed as sheet defined function, can take one or more input arguments as individual cells or ranges, and return one or more results as individual values, ranges or arrays. SDF add-in also supports spill ranges and array functions.
 
-In this way, you can define and use many sheet defined functions simultaneously. They can be defined in one workbook and used in same or in other workbooks. 
+In this way, you can define and use many sheet defined functions simultaneously. They can be defined in one workbook and used in the same or in other workbooks. 
 
 ## Basic use
 
@@ -16,7 +16,7 @@ For example, let's develop a model which estimates the position (destination and
 
 ![Projectile model](/images/projectile1.png)
 
-We would like to use this model in other workbooks, but just its calculation "service" and not the structure. For that, we expose it as a sheet defined function with two special worksheet functions: ModuleInput() and ModuleOutput().
+We would like to use this model in other workbooks, but just its calculation "service" and not the structure itself. For that, we expose it as a sheet defined function with two special worksheet functions: ModuleInput() and ModuleOutput().
 
 ### How to define module inputs
 
@@ -68,6 +68,8 @@ In this way, when we will call the module to get the "Distance" as a result, it 
 ![Projectile model](/images/projectile3.png)
 
 Similar as above, we can use other cells to define names (e.g. in cells A7 we have names of model ouputs).
+
+Please note that we changed the model expressions in cells B7 and B8 to use input parameters from cells C2, C3, C4 and C5. These cells are regarded as input "slots" into our "Projectile" module, and expressions in cells B7 and B8 will take these parameters to calculate the results. We defined these input slots by using function ModuleInput() in them.
 
 ### How to use the module
 
