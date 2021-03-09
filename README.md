@@ -28,14 +28,14 @@ Module names in ModuleInput() and ModuleOutput() serve two purposes: (1) they un
 
 ### Module inputs
 
-Our "projectile" model takes four arguments - initial speed, angle and altitude, and the time after lounch for which we are estimating the position of the projectile. We define each of the four inputs with function ModuleInput() which syntax:
+Our "projectile" model takes four arguments - initial speed, angle and altitude, and the time after lounch for which we are estimating the position of the projectile. We define each of the four inputs with function ModuleInput() which looks like:
 
 `=ModuleInput(module_name, module_range, input_name, input_initial_value)`
 
 - `module_name` is the name for our module. Since we can have many modules (many sheet defined functions), it is essential that we distinguish them by unique names. 
-- `module_range` is the range of cells where the module is defined. 
+- `module_range` is the range of cells where the module structure and formulas are defined. 
 - `input_name` is the name of the input argument.
-- `input_initial_value` is the initial value for the input argument. This value will be used by our model while we are developing its inner structure and formulas. When the model will be used from "outside", this value will be ignored.
+- `input_initial_value` is the initial value for this input argument. This value will be used by our model while we are developing its inner structure and formulas. When the model will be used from "outside", this value will be overriden.
 
 In our case, we can redefine four inputs in cells B2 to B5 as:
 
