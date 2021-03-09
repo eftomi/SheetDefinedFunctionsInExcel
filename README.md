@@ -48,7 +48,7 @@ As it can be seen from the picture above, we used absolute references for module
 
 ### Module outputs
 
-For the outputs (result values) we use function ModuleOutput() - one function for a given output:
+For the outputs (result values) we use function ModuleOutput():
 
 `=ModuleOutput(module_name, output_name, output_value)`
 
@@ -56,19 +56,23 @@ For the outputs (result values) we use function ModuleOutput() - one function fo
 - `output_name` is the name of the output
 - `output_value` is the value which will be returned to the caller
 
-For our projectile, we can define two outputs (distance and altitude) in cells C7 and C8 like
+For our projectile, we define two outputs (distance and altitude), so we need two ModuleOutput() functions. Let's put them in cells C7 and C8 like:
 
 ```
 =ModuleOutput("Projectile", "Distance", B7)
 =ModuleOutput("Projectile", "Altitude", B8)
 ```
 
-In this way, when we will call the module to get the "Distance" as a result, it will return the estimated value from cell B7, where the formula for distance is entered. The "Altitude" will work in the same way.
+In this way, when we will call the module to get the "Distance" as a result, the ModuleOutput() in C7 will return the estimated value from cell B7, where the formula for distance is entered. The "Altitude" will work in the same way.
 
 ![Projectile model](/images/projectile3.png)
 
 Similar as above, we can use other cells to define names (e.g. in cells A7 we have references to cells A7 and A8 with names of model ouputs).
 
+
 ### Module use
 
-bla bla
+The module "Projectile" is prepared. Let's try it out. Create new worksheet and prepare the cells with input values like this:
+
+![Projectile model](/images/projectile4.png)
+
