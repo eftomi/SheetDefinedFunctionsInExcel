@@ -87,9 +87,11 @@ We can call our module with ModuleUse() function:
 
 We can use as many input arguments as needed by our module.
 
+In our case, we need distance and altitude, so we have two ModuleUse() functions. We can enter them in cells F2 and G2:
+
 `=ModuleUse("Projectile", "Distance", "Initial speed", A2, "Initial angle", B2, "Initial altitude", C2, "Time", D2)`
+`=ModuleUse("Projectile", "Altitude", "Initial speed", A2, "Initial angle", B2, "Initial altitude", C2, "Time", D2)`
 
+We can of course use cell references to names of inputs and outputs:
 
-
-like this:
-
+![Projectile model](/images/projectile5.png)
