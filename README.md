@@ -2,7 +2,7 @@
 
 ## Sheet Defined Functions in MS Excel
 
-### This add-in for MS Excel enables the use of parts of an Excel workbook as functions. If you developed a model in Excel spreadsheet and would like to expose it as a function to be used in other parts of the same workbook or in other workbooks, you can use this add-in.
+### With this add-in for Excel you can use parts of Excel workbook as functions. If you developed a model in Excel spreadsheet and would like to expose it as a function, to be used in other parts of the same workbook or in other workbooks, you can use this simple add-in.
 
 Instead of coding a VBA function or constructing a complex lambda expression, you can develop your function in traditional way as a spreadsheet model and define its inputs and outputs. After that, your model can be regarded as a "black box" - once developed and exposed as a sheet defined function, you have no concerns about its inner workings and internal structure, you just use its results. 
 
