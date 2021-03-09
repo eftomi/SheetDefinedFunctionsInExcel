@@ -18,11 +18,13 @@ For example, let's develop a model which estimates the position (destination and
 
 We have input values in cells B2 to B5, and projectile motion formulas in cells B7 and B8. We would like to use this model in other workbooks, but just its calculation "service" and not the actual structure by itself. For that, we expose the model as a sheet defined function with two special worksheet functions: ModuleInput() and ModuleOutput(). 
 
-ModuleInput() creates an "input slot", i.e. a cell that will take input values from module calls. Besides this, it defines the name of the module, the range of cells where the structure of the module is defined, the name of the input, and input's initial value.
+Each ModuleInput() function creates an "input slot", i.e. a cell that will take input values from module calls. Besides this, it defines the name of the module (we'll use the name "Projectile"), the range of cells where the structure of the module is defined (ours is defined in range A2:B8 for now), the name of the input (e.g. "Initial speed"), and input's initial value (e.g. 130).
 
-ModuleOutput() defines the name of the output, the value that should be considered as the result (formula or cell reference), and the name of the module.
+ModuleOutput() defines the name of the output (e.g. "Distance"), the value that should be considered as the result (formula or cell reference, e.g. B7), and the name of the module ("Projectile").
 
-Module names in ModuleInput() and ModuleOutput() functions serve two purposes: (1) they uniquely define a module and (2) they tie inputs and outputs to this module.
+For each module, we can use one or more inputs and outputs. Our module "Projectile" will have four inputs and two outputs.
+
+Module names in ModuleInput() and ModuleOutput() serve two purposes: (1) they uniquely define a module, and (2) they tie named inputs and outputs to this module.
 
 ### Module inputs
 
