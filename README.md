@@ -72,11 +72,24 @@ Similar as above, we can use other cells to define names (e.g. in cells A7 we ha
 
 ### Module use
 
-The module "Projectile" is prepared - let's try it out! Create new worksheet and prepare the cells with input values like this:
+The module "Projectile" is prepared - let's try it out! We create new worksheet and prepare the cells with input values like this:
 
 ![Projectile model](/images/projectile4.png)
 
-We can call our module with ModuleUse() function like this:
+We can call our module with ModuleUse() function: 
+
+`=ModuleUse(module_name, output_name, input_name_1, input_value_1, [input_name_2, input_value_2], ... )`
+
+- `module_name` is a name for our module
+- `output_name` is the name of the output that we need
+- `input_name_1` is the name of the first input argument
+- `input_value_1` is the value of the first input argument
+
+We can use as many input arguments as needed by our module.
 
 `=ModuleUse("Projectile", "Distance", "Initial speed", A2, "Initial angle", B2, "Initial altitude", C2, "Time", D2)`
+
+
+
+like this:
 
