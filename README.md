@@ -96,8 +96,13 @@ Since we wrote input and output names in cells A1..D1 and F1..G1 exactly as defi
 
 ![Projectile model](/images/projectile5.png)
 
-For the calculation to be performed, we click on Calculate SDFs button on Sheet Defined Functions ribbon.
+For the calculation to be performed, we click on *Calculate SDFs* button on *Sheet Defined Functions* ribbon.
 
 ![Projectile model](/images/calculateSDFs.png)
 
 ![Projectile model](/images/projectile6.png)
+
+We can use the module many times. Suppose that we need to estimate projectile trajectory for the first 5 seconds, in 0.5 seconds intervals. For simplicity, we can copy input values to cells below, where we increment the time parameter by 0.5. Formulas with module calls can be copied from cells F1 and G1, too. After copying and clicking on *Calculate SDFs*, we get:
+
+![Projectile model](/images/projectile7.png)
+
