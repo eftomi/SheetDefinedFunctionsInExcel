@@ -63,7 +63,7 @@ For our projectile, we can define two outputs (distance and altitude) in cells C
 =ModuleOutput("Projectile", "Altitude", B8)
 ``` 
 
-In this way, when we will call the module to get the 'distance' as a result, it will return the estimated value from cell B7, where the formula for distance is entered.
+In this way, when we will call the module to get the 'distance' as a result, it will return the estimated value from cell B7, where the formula for distance is entered. The 'altitude' will work in the same way.
 
 ![Projectile model](/images/projectile3.png)
 
