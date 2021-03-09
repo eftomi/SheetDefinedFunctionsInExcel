@@ -69,7 +69,7 @@ In this way, when we will call the module to get the "Distance" as a result, it 
 
 Similar as above, we can use other cells to define names (e.g. in cells A7 we have names of model ouputs).
 
-Please note that we changed the model expressions in cells B7 and B8 to use input parameters from cells C2, C3, C4 and C5. These cells are regarded as input "slots" into our "Projectile" module, and expressions in cells B7 and B8 will take these parameters to calculate the results. We defined these input slots by using function ModuleInput() in them.
+**Please note that we changed the model expressions in cells B7 and B8 to use input parameters from cells C2, C3, C4 and C5. These cells are regarded as input "slots" into our "Projectile" module, and expressions in cells B7 and B8 will take these parameters to calculate the results. We defined these input slots by using function ModuleInput() in them.**
 
 ### How to use the module
 
