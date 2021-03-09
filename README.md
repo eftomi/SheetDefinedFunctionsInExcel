@@ -25,11 +25,8 @@ The model will take four arguments - initial speed, angle and altitude, and the 
 `=ModuleInput(module_name, module_range, input_name, input_initial_value)`
 
 - `module_name` is a name for our module. Since we can have many modules (many sheet defined functions), it is essential that we distinguish them by unique names. 
-
 - `module_range` is a range of cells where the module is defined. 
-
 - `input_name` is the name of the input argument.
-
 - `input_initial_value` is the initial value for the input argument. This value will be used by our model while we are developing its inner structure and formulas. When the model is used, this value is ignored.
 
 In our case, we can define four inputs in cells C2 to C5 as:
@@ -55,11 +52,9 @@ For the outputs (result values) we use function ModuleOutput() - one function fo
 
 `=ModuleOutput(module_name, output_name, output_value)`
 
-- `module_name` is a name for our module. 
-
-- `output_name` is the name of the output.
-
-- `output_value` is the value which will be returned to the caller.
+- `module_name` is a name for our module
+- `output_name` is the name of the output
+- `output_value` is the value which will be returned to the caller
 
 For our projectile, we can define two outputs (distance and altitude) in cells C7 and C8 like
 
