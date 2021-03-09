@@ -106,3 +106,15 @@ We can use the module many times. Suppose that we need to estimate projectile tr
 
 ![Projectile model](/images/projectile7.png)
 
+If we order input parameters and their names in rows or columns, we can instead use ModuleUseRangeInputs() function to call the module, which is more convenient:
+
+`=ModuleUseRangeInputs(module_name, output_name, input_names, input_values)`
+
+- `module_name` is a name of module that we would like to use
+- `output_name` is the name of the output that we need from module
+- `input_names` is the range of input names
+- `input_values` is the range of input values
+
+Needless to say, the order of input names and corresponding input values has to be the same in both ranges.
+
+![Projectile model](/images/projectile8.png)
