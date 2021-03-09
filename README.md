@@ -18,7 +18,7 @@ For example, let's develop a model which estimates the position (destination and
 
 We would like to use this model in other workbooks, but just its calculation "service" and not the structure itself. For that, we expose it as a sheet defined function with two special worksheet functions: ModuleInput() and ModuleOutput().
 
-### How to define module inputs
+### Module inputs
 
 The model will take four arguments - initial speed, angle and altitude, and the time after lounch for which we are estimating the position. We define each of the four inputs with  function ModuleInput() which looks like:
 
@@ -42,11 +42,11 @@ Our module will thus be called "Projectile", its structure and formulas are defi
 
 ![Projectile model](/images/projectile2.png)
 
-As it can be seen in the picture above, we used absolute references for module range $A$2:$C$8 to simplify copying the formula from cell B2 to cells B3..B5. Since we have module argument names (initial speed, initial angle ...) already nicely written in cells A2..A5, we used references to these cells as the third argument to ModuleInput() functions. Similarly, we took values from cells B2..B5 to be initial input values for our module.
+As it can be seen from the picture above, we used absolute references for module range $A$2:$C$8 to simplify copying the formula from cell B2 to cells B3..B5. Since we have module argument names (initial speed, initial angle ...) already nicely written in cells A2..A5, we used references to these cells as the third argument to ModuleInput() functions. Similarly, we took values from cells B2..B5 to be initial input values for our module.
 
-**In this way, we defined module "Projectile" with four input "slots" - in other words, cells B2 to B5 will take input parameters when the model will be used. This is important since the "body" of our model (formulas which calculate distance in altitude) should use these input values. **
+**In this way, we defined module "Projectile" with four input "slots" - in other words, cells B2 to B5 will take input parameters when the model will be used. This is important since the body of our model (formulas which calculate distance in altitude) should use these input values. **
 
-### How to define module outputs
+### Module outputs
 
 For the outputs (result values) we use function ModuleOutput() - one function for a given output:
 
@@ -69,6 +69,6 @@ In this way, when we will call the module to get the "Distance" as a result, it 
 
 Similar as above, we can use other cells to define names (e.g. in cells A7 we have references to cells A7 and A8 with names of model ouputs).
 
-### How to use the module
+### Module use
 
 bla bla
