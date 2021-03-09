@@ -80,8 +80,8 @@ We can call our module with ModuleUse() function:
 
 `=ModuleUse(module_name, output_name, input_name_1, input_value_1, [input_name_2, input_value_2], ... )`
 
-- `module_name` is a name for our module
-- `output_name` is the name of the output that we need
+- `module_name` is a name of module that we would like to use
+- `output_name` is the name of the output that we need from module
 - `input_name_1` is the name of the first input argument
 - `input_value_1` is the value of the first input argument
 
@@ -92,6 +92,11 @@ In our case, we need distance and altitude, so we have two ModuleUse() functions
 `=ModuleUse("Projectile", "Distance", "Initial speed", A2, "Initial angle", B2, "Initial altitude", C2, "Time", D2)`
 `=ModuleUse("Projectile", "Altitude", "Initial speed", A2, "Initial angle", B2, "Initial altitude", C2, "Time", D2)`
 
-We can of course use cell references to names of inputs and outputs:
+Since we wrote input and output names in cells A1..D1 and F1..G1 exactly as defined by module, we can use cell references in ModuleUse() like this:
 
 ![Projectile model](/images/projectile5.png)
+
+For the calculation to be performed, we click on Calculate SDFs button on Sheet Defined Functions ribbon.
+
+![Projectile model](/images/calculateSDFs.png)
+![Projectile model](/images/projectile6.png)
