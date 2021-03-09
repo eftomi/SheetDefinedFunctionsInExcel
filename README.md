@@ -42,7 +42,7 @@ Our module will thus be called "Projectile", its structure and formulas are defi
 
 ![Projectile model](/images/projectile2.png)
 
-As it can be seen in the picture above, we used absolute references for module range $A$2:$C$8 to simplify copying the formula from cell C2 to cells C3..C5. Since we have module argument names (initial speed, initial angle ...) already nicely written in cells A2..A5, we used references to these cells as the third argument to ModuleInput() functions. Similarly, we took values from cells B2..B5 to be initial input values for our module.
+As it can be seen in the picture above, we used absolute references for module range $A$2:$C$8 to simplify copying the formula from cell B2 to cells B3..B5. Since we have module argument names (initial speed, initial angle ...) already nicely written in cells A2..A5, we used references to these cells as the third argument to ModuleInput() functions. Similarly, we took values from cells B2..B5 to be initial input values for our module.
 
 **In this way, we defined module "Projectile" with four input "slots" - in other words, cells C2 to C5 will take input parameters when the model will be used. This is important since the "body" of our model should use these values instead of the values in cells B2..B5.**
 
