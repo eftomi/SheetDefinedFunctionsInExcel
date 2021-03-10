@@ -159,20 +159,31 @@ We called the module with formula in cell B2:
 
 After clicking on *Calculate SDFs button*, the module returns the sum. It behaves as expected - it updates the sum correctly - if we change the size of the range of input values.
 
-Outputs can be spilled ranges as well. let's suppose we would like to have another output from this module - for each input value, the module should return a difference between this value and the average of all input values. 
+Outputs can be spilled ranges as well. Let's suppose we would like to have another output from this module - for each input value, the module should return a difference between this value and the average of all input values. 
 
 Firstly, we need a formula to calculate average of all input values:
 
 `=AVERAGE(A5#)`
 
-We can put this formula in cell B2. Secondly, for each of the input values we need to calculate the difference. Since the input values are nicely ordered in spill range, we can simply write
+We can put this formula in cell B2 of our "Stats" module. Secondly, for each of the input values we need to calculate the difference. Since the input values are nicely ordered in spill range which begins at cell A5, we can simply write
 
 `=A5#-B2`
 
-in cell B5. B2 keeps the average of all the values, and A5 is the first value from our spill range. To safe the space, we can directly expose this cell as an output by wrapping the above formula with ModuleOutput() function like:
+in cell B5. B2 keeps the average of all the values, and A5 is the first value from our spill range. 
+
+To safe the space, we can directly expose this formula as an output by wrapping it with ModuleOutput() function like in:
 
 `=ModuleOutput("Stats", "Differences", A5#-B2)`
 
 Finally, our module looks like this:
 
 ![Projectile model](/images/projectile11.png)
+
+We can later refer to "Differences" output range with the formula like:
+
+`=ModuleUse("Stats", "Differences", "Values", A3:A11)`
+
+Our use of "Stats" module finally looks like:
+
+![Projectile model](/images/projectile12.png)
+
