@@ -4,11 +4,11 @@
 
 ### If you developed a model in Excel spreadsheet and would like to expose it as a function to be used in other parts of the same workbook or in other workbooks, this add-in can help you. 
 
-Instead of coding a VBA function or constructing a complex lambda expression, you can develop your function as a spreadsheet model in a traditional way by putting expressions in cells. After your model is developed with all the complexities, this add-in allows you to define its inputs and outputs. By doing that, your model can be regarded as a "black box" - once developed and exposed as a sheet defined function, you will have no concerns about its inner workings and internal structure, you just use the results that are returned from it. 
+Instead of coding a VBA function or constructing a complex lambda expression, you can develop your function as a spreadsheet model in a traditional way by putting expressions in cells. After your model is developed with all the complexities, this add-in allows you to specify its inputs and outputs. By doing that, your model can be regarded as a "black box" - once developed and exposed as a sheet defined function, you will have no concerns about its inner workings and internal structure, you just use the results that are returned from it. 
 
 Sheet defined function can take input parameters, recalculate itself and return the results. Your model, once exposed as sheet defined function can take one or more input arguments as individual cells or ranges, and return one or more results as individual values, ranges or arrays. Spill ranges and array formulas can be used as input arguments and results, too.
 
-In this way, you can define and use many sheet defined functions simultaneously. They can be defined in one workbook and used in the same or in other workbooks. 
+In this way, you can create and use many sheet defined functions simultaneously. They can be defined in one workbook and used in the same or in other workbooks. 
 
 ## Basic use
 
@@ -18,9 +18,9 @@ Let's develop a model which estimates the position (destination and altitude) of
 
 We have input values in cells B2 to B5, and projectile motion formulas in cells B7 and B8. We would like to use this model in other workbooks, but just its calculation "service" and not the actual structure by itself. In this way, we won't have to use any direct references into model structure, nor the model should reference any cells from outside of it. To do that, we can expose the model as a sheet defined function with two special worksheet functions: ModuleInput() and ModuleOutput() which are a part of SDF add-in functionality. We use these two functions within the model that should be exposed as sheet defined function.
 
-When used in a spreadsheet cell, each ModuleInput() function creates an "input slot" for the module, i.e. a cell that will take input values from module calls. Besides this, it defines the name of the module (for our example we'll use the name "Projectile"), the range of cells where the structure of the module is defined (ours is defined in range A2:B8 for now), the name of the input (e.g. "Initial speed"), and input's initial value (e.g. 130 m/s).
+When used in a spreadsheet cell, each ModuleInput() function creates an "input slot" for the module, i.e. a cell that will take input values from module calls. Besides this, it specifies the name of the module (for our example we'll use the name "Projectile"), the range of cells where the structure of the module is defined (ours is defined in range A2:B8 for now), the name of the input (e.g. "Initial speed"), and input's initial value (e.g. 130 m/s).
 
-ModuleOutput() function defines the name of the output (e.g. "Distance"), the value that should be considered as the result (formula or cell reference, e.g. B7), and the name of the module ("Projectile").
+ModuleOutput() function declares the name of the output (e.g. "Distance"), the value that should be considered as the result (formula or cell reference, e.g. B7), and the name of the module ("Projectile").
 
 For each module, we can use one or more inputs and one or more outputs. Our module "Projectile" will have four inputs and two outputs.
 
@@ -28,16 +28,16 @@ Module names in ModuleInput() and ModuleOutput() functions serve two purposes: (
 
 ### Module inputs
 
-Our "projectile" model takes four arguments - initial speed, angle and altitude, and the time after lounch for which we are estimating the position of the projectile. We define each of the four inputs with function ModuleInput() which looks like:
+Our "projectile" model takes four arguments - initial speed, angle and altitude, and the time after lounch for which we are estimating the position of the projectile. We declare each of the four inputs with function ModuleInput() which looks like:
 
 `=ModuleInput(module_name, module_range, input_name, input_initial_value)`
 
 - `module_name` is the name for our module. Since we can have many modules (many sheet defined functions), it is essential that we distinguish them by unique names. 
 - `module_range` is the range of cells where the module structure and formulas are defined. 
 - `input_name` is the name of the input argument.
-- `input_initial_value` is the initial value for this input argument. This value will be used by our model while we are developing its inner structure and formulas. When the model will be used from "outside", this value will be overriden.
+- `input_initial_value` is the initial value for this input argument. This value will be used by our model while we are developing its inner structure and formulas. When the model will be used from "outside", this value will be overriden by actual input values.
 
-In our case, we can redefine four inputs in cells B2 to B5 as:
+In our case, we can rewrite four input parameters in cells B2 to B5 to:
 
 ```
 =ModuleInput("Projectile", A2:C8, "Initial speed", 130)
@@ -46,25 +46,25 @@ In our case, we can redefine four inputs in cells B2 to B5 as:
 =ModuleInput("Projectile", A2:C8, "Time", 0.5)
 ```
 
-Our module will thus be called "Projectile", its structure and formulas are defined in the range A2:C8. The names of the inputs are descriptive, and we'll refer to them when we will use the model. The initial values will be displayed in cells B2 to B5 with ModuleInput() functions as their value; we can conveniently use them while constructing and updating the "body" of our module: 
+Our module will thus be called "Projectile", its structure and formulas are defined in range A2:C8. The names of the inputs are descriptive, and we'll refer to them when we will use the model. When entering the ModuleInput() functions into cells B2 to B5, the initial values 130, 25, 0 and 0.5 will be displayed in these cells; we can conveniently use them while constructing and updating the "body" of our module: 
 
 ![Projectile model](/images/projectile2.png)
 
-As it can be seen from the picture above, we used absolute references for module range $A$2:$C$8 to simplify copying the formula from cell B2 to cells B3..B5. Since we have module argument names (initial speed, initial angle ...) already nicely written in cells A2..A5, we used references to these cells as the third argument to ModuleInput() functions. Similarly, we took values from cells B2..B5 to be initial input values for our module.
+As it can be seen from the picture above, we used absolute references for module range $A$2:$C$8 to simplify copying the formula from cell B2 to cells B3..B5. Since we have module argument names (initial speed, initial angle ...) already nicely written in cells A2..A5, we used references to these cells as the third argument to ModuleInput() functions. 
 
-**In this way, we defined module "Projectile" with four input "slots" - in other words, cells B2 to B5 will take input parameters when the model will be used. This is important since the body of our model (formulas which calculate distance in altitude) should use these input values.**
+**In this way, we defined module "Projectile" with four input "slots" - in other words, cells B2 to B5 will take input parameters when the model will be used. This is important since the body of our model (formulas which calculate distance in altitude) should use (reference) these input values.**
 
 ### Module outputs
 
-For the outputs (result values) we use function ModuleOutput():
+To declare outputs (results of the module) we use function ModuleOutput():
 
 `=ModuleOutput(module_name, output_name, output_value)`
 
-- `module_name` is a name for our module
-- `output_name` is the name of the output
+- `module_name` is the name for our module
+- `output_name` is the name of the output that we are declaring
 - `output_value` is the value which will be returned to the caller
 
-For our projectile, we define two outputs (distance and altitude), so we need two ModuleOutput() functions. Let's put them in cells C7 and C8 like:
+For our projectile, we declare two outputs (distance and altitude), so we need two ModuleOutput() functions. Let's put them in cells C7 and C8 like:
 
 ```
 =ModuleOutput("Projectile", "Distance", B7)
@@ -75,7 +75,7 @@ In this way, when we will call the module to get the "Distance" as a result, the
 
 ![Projectile model](/images/projectile3.png)
 
-Similar as above, we can use other cells to define names (e.g. in cells A7 we have references to cells A7 and A8 with names of model ouputs).
+Similar as above, we can use other cells to specify names (e.g. in cells A7 we have references to cells A7 and A8 with names of model ouputs).
 
 
 ### Module use
