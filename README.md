@@ -187,4 +187,6 @@ Our use of "Stats" module finally looks like:
 
 ![Projectile model](/images/projectile12.png)
 
+![Projectile model](/images/StatsMovie.gif)
+
 Besides spill ranges, we can use array formulas, too. In this case, we have to predict in advance the maximum size of the input and output arrays, and enter the ModuleInput() and ModuleOutput() functions as array formulas.
