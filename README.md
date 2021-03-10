@@ -139,7 +139,7 @@ In a new worksheet, we'll arrange values that have to be summed up in a column, 
 
 `=ModuleInput("Stats", A1:B20, "Values", {1, 2, 3})`
 
-"Stats" is our module, A1:B20 is the range of cells with the module structure, "Values" is the name of this input, and array {1, 2, 3} is the initial array to be summed up. After entering the formula, the array {1, 2, 3} should be spilled in cells A5..A7.
+"Stats" is our new module, A1:B20 is the range of cells with the module structure, "Values" is the name of this input, and array {1, 2, 3} is the initial array to be summed up. After entering the formula, the array {1, 2, 3} should be spilled in cells A5..A7.
 
 Let's put the sum of input values in cell B1. Since this is also the output from our model, we can declare it with a formula like:
 
@@ -149,7 +149,11 @@ Let's put the sum of input values in cell B1. Since this is also the output from
 
 ![Projectile model](/images/projectile9.png)
 
-The module "Stats" is prepared, and we can use it by some other spreadsheet. In the worksheet in the picture below, we have entered input values in cells A3..A11. We call the module with formula in cell B2:
+The module "Stats" is prepared, and we can use it from some other worksheet. In the worksheet in the picture below, we have entered input values in cells A3..A11. 
+
+![Projectile model](/images/projectile11.png)
+
+We called the module with formula in cell B2:
 
 `=ModuleUse("Stats", "Sum", "Values", A3:A11)`
 
@@ -171,4 +175,4 @@ in cell B5. B2 keeps the average of all the values, and A5 is the first value fr
 
 Finally, our module looks like this:
 
-![Projectile model](/images/projectile10.png)
+![Projectile model](/images/projectile11.png)
