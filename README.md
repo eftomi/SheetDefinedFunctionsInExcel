@@ -134,3 +134,17 @@ Needless to say, the order of input names and corresponding input values has to 
 ### Spill ranges and array formulas as inputs and outputs
 
 SDF add-in supports spill ranges and array formulas. Module inputs and outputs can be arrays, not just single values. As a simple example, let's create a module that calculates the sum of arbitrary number of input values.
+
+In a new worksheet, we'll arrange values that have to be summed up in a column, starting from cell A5 and down. This column will represent the module input, so we declare it with the formula like:
+
+`=ModuleInput("Stats", A1:B20, "Values", 2)`
+
+"Stats" is our module, A1:B20 is the range of cells with the module structure, "Values" is the name of this input, and number 2 is initial number to be summed up.
+
+Let's put the sum of input values in cell B1. Since this is also the output from our model, we can declare it with this formula:
+
+`=ModuleOutput("Stats", "Sum", SUM(A5))`
+
+Our module structure is not complicated at all:
+
+![Projectile model](/images/projectile9.png)
