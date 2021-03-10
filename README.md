@@ -4,9 +4,9 @@
 
 ### If you developed a model in Excel spreadsheet and would like to expose it as a function to be used in other parts of the same workbook or in other workbooks, this add-in can help you. 
 
-Instead of coding a VBA function or constructing a complex lambda expression, you can develop your function as a spreadsheet model in a traditional way by putting expressions in cells. After your model is developed with all the complexities, add-in allows you to define its inputs and outputs. By doing that, your model can be regarded as a "black box" - once developed and exposed as a sheet defined function, you will have no concerns about its inner workings and internal structure, you just use the results that are returned from it. 
+Instead of coding a VBA function or constructing a complex lambda expression, you can develop your function as a spreadsheet model in a traditional way by putting expressions in cells. After your model is developed with all the complexities, this add-in allows you to define its inputs and outputs. By doing that, your model can be regarded as a "black box" - once developed and exposed as a sheet defined function, you will have no concerns about its inner workings and internal structure, you just use the results that are returned from it. 
 
-Sheet defined function can take input parameters, recalculate itself and return the results. Your model, once exposed as sheet defined function can take one or more input arguments as individual cells or ranges, and return one or more results as individual values, ranges or arrays. Spill ranges and array formulas can be used as input arguments and results.
+Sheet defined function can take input parameters, recalculate itself and return the results. Your model, once exposed as sheet defined function can take one or more input arguments as individual cells or ranges, and return one or more results as individual values, ranges or arrays. Spill ranges and array formulas can be used as input arguments and results, too.
 
 In this way, you can define and use many sheet defined functions simultaneously. They can be defined in one workbook and used in the same or in other workbooks. 
 
@@ -16,11 +16,11 @@ Let's develop a model which estimates the position (destination and altitude) of
 
 ![Projectile model](/images/projectile1.png)
 
-We have input values in cells B2 to B5, and projectile motion formulas in cells B7 and B8. We would like to use this model in other workbooks, but just its calculation "service" and not the actual structure by itself. In this way, we won't have to use any direct references into model structure, nor the model should reference any cells from outside of it. To do that, we can expose the model as a sheet defined function with two special worksheet functions: ModuleInput() and ModuleOutput() which are a part of SDF add-in functionality. 
+We have input values in cells B2 to B5, and projectile motion formulas in cells B7 and B8. We would like to use this model in other workbooks, but just its calculation "service" and not the actual structure by itself. In this way, we won't have to use any direct references into model structure, nor the model should reference any cells from outside of it. To do that, we can expose the model as a sheet defined function with two special worksheet functions: ModuleInput() and ModuleOutput() which are a part of SDF add-in functionality. We use these two functions within the model that should be exposed as sheet defined function.
 
-When used in a spreadsheet cell, each ModuleInput() function creates an "input slot", i.e. a cell that will take input values from module calls. Besides this, it defines the name of the module (for our example we'll use the name "Projectile"), the range of cells where the structure of the module is defined (ours is defined in range A2:B8 for now), the name of the input (e.g. "Initial speed"), and input's initial value (e.g. 130 m/s).
+When used in a spreadsheet cell, each ModuleInput() function creates an "input slot" for the module, i.e. a cell that will take input values from module calls. Besides this, it defines the name of the module (for our example we'll use the name "Projectile"), the range of cells where the structure of the module is defined (ours is defined in range A2:B8 for now), the name of the input (e.g. "Initial speed"), and input's initial value (e.g. 130 m/s).
 
-ModuleOutput() defines the name of the output (e.g. "Distance"), the value that should be considered as the result (formula or cell reference, e.g. B7), and the name of the module ("Projectile").
+ModuleOutput() function defines the name of the output (e.g. "Distance"), the value that should be considered as the result (formula or cell reference, e.g. B7), and the name of the module ("Projectile").
 
 For each module, we can use one or more inputs and one or more outputs. Our module "Projectile" will have four inputs and two outputs.
 
