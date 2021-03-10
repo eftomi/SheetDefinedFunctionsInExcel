@@ -135,16 +135,40 @@ Needless to say, the order of input names and corresponding input values has to 
 
 SDF add-in supports spill ranges and array formulas. Module inputs and outputs can be arrays, not just single values. As a simple example, let's create a module that calculates the sum of arbitrary number of input values.
 
-In a new worksheet, we'll arrange values that have to be summed up in a column, starting from cell A5 and down. This column will represent the module input, so we declare it with the formula like:
+In a new worksheet, we'll arrange values that have to be summed up in a column, starting from cell A5 and down. This column will represent the module input, so we declare it with the formula in cell A5 like:
 
-`=ModuleInput("Stats", A1:B20, "Values", 2)`
+`=ModuleInput("Stats", A1:B20, "Values", {1, 2, 3})`
 
-"Stats" is our module, A1:B20 is the range of cells with the module structure, "Values" is the name of this input, and number 2 is initial number to be summed up.
+"Stats" is our module, A1:B20 is the range of cells with the module structure, "Values" is the name of this input, and array {1, 2, 3} is the initial array to be summed up. After entering the formula, the array {1, 2, 3} should be spilled in cells A5..A7.
 
-Let's put the sum of input values in cell B1. Since this is also the output from our model, we can declare it with this formula:
+Let's put the sum of input values in cell B1. Since this is also the output from our model, we can declare it with a formula like:
 
-`=ModuleOutput("Stats", "Sum", SUM(A5))`
+`=ModuleOutput("Stats", "Sum", SUM(A5#))`
 
-Our module structure is not complicated at all:
+"Sum" is the name of the output, and return value will be the sum of spill range which begins by the A5 cell. Our module structure is not complicated at all:
 
 ![Projectile model](/images/projectile9.png)
+
+The module "Stats" is prepared, and we can use it by some other spreadsheet. In the worksheet in the picture below, we have entered input values in cells A3..A11. We call the module with formula in cell B2:
+
+`=ModuleUse("Stats", "Sum", "Values", A3:A11)`
+
+After clicking on *Calculate SDFs button*, the module returns the sum. It behaves as expected - it updates the sum correctly - if we change the size of the range of input values.
+
+Outputs can be spilled ranges as well. let's suppose we would like to have another output from this module - for each input value, the module should return a difference between this value and the average of all input values. 
+
+Firstly, we need a formula to calculate average of all input values:
+
+`=AVERAGE(A5#)`
+
+We can put this formula in cell B2. Secondly, for each of the input values we need to calculate the difference. Since the input values are nicely ordered in spill range, we can simply write
+
+`=A5#-B2`
+
+in cell B5. B2 keeps the average of all the values, and A5 is the first value from our spill range. To safe the space, we can directly expose this cell as an output by wrapping the above formula with ModuleOutput() function like:
+
+`=ModuleOutput("Stats", "Differences", A5#-B2)`
+
+Finally, our module looks like this:
+
+![Projectile model](/images/projectile10.png)
