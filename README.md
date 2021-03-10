@@ -71,31 +71,31 @@ For our projectile, we declare two outputs (distance and altitude), so we need t
 =ModuleOutput("Projectile", "Altitude", B8)
 ```
 
-In this way, when we will call the module to get the "Distance" as a result, the ModuleOutput() in C7 will return the estimated value from cell B7, where the formula for distance is entered. The "Altitude" will work in the same way.
+In this way, when we will call the module "Projectile" to get the "Distance" as a result, the ModuleOutput() in C7 will tell it to return the value from cell B7, where the formula for distance is entered. The "Altitude" will work in the same way.
 
 ![Projectile model](/images/projectile3.png)
 
-Similar as above, we can use other cells to specify names (e.g. in cells A7 we have references to cells A7 and A8 with names of model ouputs).
+Similar as above, we can use other cells to specify names (e.g. in cells A7 we already have names of model ouputs that can be used as output names).
 
 
 ### Module use
 
-The module "Projectile" is prepared - let's try it out! We create new worksheet and prepare the cells with input values like this:
+The module "Projectile" is prepared - let's try it out! We can create new worksheet and prepare the cells with input values a bit differently this time, for intance in a row like this:
 
 ![Projectile model](/images/projectile4.png)
 
-We can call our module with ModuleUse() function: 
+We call our module with ModuleUse() function: 
 
 `=ModuleUse(module_name, output_name, input_name_1, input_value_1, [input_name_2, input_value_2], ... )`
 
-- `module_name` is a name of module that we would like to use
+- `module_name` is the name of the module that we would like to use
 - `output_name` is the name of the output that we need from module
 - `input_name_1` is the name of the first input argument
 - `input_value_1` is the value of the first input argument
 
 We can use as many input arguments as needed by our module.
 
-In our case, we need distance and altitude, so we have two ModuleUse() functions. We can enter them in cells F2 and G2:
+In our case, we of course need two results, distance and altitude, so we have two ModuleUse() functions. We can enter them in cells F2 and G2:
 
 `=ModuleUse("Projectile", "Distance", "Initial speed", A2, "Initial angle", B2, "Initial altitude", C2, "Time", D2)`
 `=ModuleUse("Projectile", "Altitude", "Initial speed", A2, "Initial angle", B2, "Initial altitude", C2, "Time", D2)`
