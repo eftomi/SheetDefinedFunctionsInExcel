@@ -16,15 +16,15 @@ Let's develop a model which estimates the position (destination and altitude) of
 
 ![Projectile model](/images/projectile1.png)
 
-We have input values in cells B2 to B5, and projectile motion formulas in cells B7 and B8. We would like to use this model in other workbooks, but just its calculation "service" and not the actual structure by itself. In this way, we won't have to use any direct references into model structure, nor the model should reference any cells from outside of it. To do that, we can expose the model as a sheet defined function with two special worksheet functions: ModuleInput() and ModuleOutput() which are a part of SDF add-in functionality. We use these two functions within the model that should be exposed as sheet defined function.
+We have input values in cells B2 to B5, and projectile motion formulas in cells B7 and B8. We would like to use this model in other workbooks, but just its calculation "service" and not the actual structure by itself. In this way, we won't have to use any direct references into model structure, nor the model should reference any cells outside of it. To do that, we can expose the model as a sheet defined function with two special worksheet functions which are a part of SDF add-in functionality: ModuleInput() and ModuleOutput(). We use these two functions within the model that should be exposed as a sheet defined function.
 
-When used in a spreadsheet cell, each ModuleInput() function creates an "input slot" for the module, i.e. a cell that will take input values from module calls. Besides this, it specifies the name of the module (for our example we'll use the name "Projectile"), the range of cells where the structure of the module is defined (ours is defined in range A2:B8 for now), the name of the input (e.g. "Initial speed"), and input's initial value (e.g. 130 m/s).
+When used in a spreadsheet cell, each ModuleInput() function creates one "input slot" for the module, i.e. a cell that will take input values from module calls. Besides this, it specifies the name of the module (for our example we'll use the module name "Projectile"), the range of cells where the structure of the module is defined (ours is defined in range A2:B8 for now), the name of the input (e.g. "Initial speed"), and input's initial value (e.g. 130 m/s).
 
-ModuleOutput() function declares the name of the output (e.g. "Distance"), the value that should be considered as the result (formula or cell reference, e.g. B7), and the name of the module ("Projectile").
-
-For each module, we can use one or more inputs and one or more outputs. Our module "Projectile" will have four inputs and two outputs.
+ModuleOutput() function declares the name of the output (e.g. "Distance"), the value that should be considered as the result (formula or cell reference, e.g. B7). We also have to reference the proper module by its name ("Projectile").
 
 Module names in ModuleInput() and ModuleOutput() functions serve two purposes: (1) they uniquely define a module, and (2) they tie named inputs and outputs to this module.
+
+For each module, we can use one or more inputs (i.e. ModuleInput() functions) and one or more outputs (i.e. ModuleOutput() functions). Our module "Projectile" will thus have four inputs and two outputs.
 
 ### Module inputs
 
@@ -130,3 +130,7 @@ If we order input parameters and their names in rows or columns, we can instead 
 Needless to say, the order of input names and corresponding input values has to be the same in both ranges.
 
 ![Projectile model](/images/projectile8.png)
+
+### Spill ranges and array formulas as inputs and outputs
+
+Cells that take inputs and represent outputs can return arrays, not just single values. In Excel, this is done by cell spills and array formulas. SDF add-in supports this functionality. As a simple example, let's create a module that calculates the sum of arbitrary number of input values.
