@@ -133,4 +133,4 @@ Needless to say, the order of input names and corresponding input values has to 
 
 ### Spill ranges and array formulas as inputs and outputs
 
-Cells that take inputs and represent outputs can represent arrays, not just single values. SDF add-in supports spill ranges and array formulas. As a simple example, let's create a module that calculates the sum of arbitrary number of input values.
+SDF add-in supports spill ranges and array formulas. Module inputs and outputs can be arrays, not just single values. As a simple example, let's create a module that calculates the sum of arbitrary number of input values.
