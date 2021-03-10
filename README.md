@@ -131,9 +131,9 @@ Needless to say, the order of input names and corresponding input values has to 
 
 ![Projectile model](/images/projectile8.png)
 
-### Spill ranges and array formulas as inputs and outputs
+### Spill ranges as inputs and outputs
 
-SDF add-in supports spill ranges and array formulas. Module inputs and outputs can be arrays, not just single values. As a simple example, let's create a module that calculates the sum of arbitrary number of input values.
+SDF add-in supports spill ranges. Module inputs and outputs can be arrays, not just single values. As a simple example, let's create a module that calculates the sum of arbitrary number of input values.
 
 In a new worksheet, we'll arrange values that have to be summed up in a column, starting from cell A5 and down. This column will represent the module input, so we declare it with the formula in cell A5 like:
 
@@ -153,13 +153,13 @@ The module "Stats" is prepared, and we can use it from some other worksheet. In 
 
 ![Projectile model](/images/projectile10.png)
 
-We called the module with formula in cell B2:
+We call the module with formula in cell B2:
 
 `=ModuleUse("Stats", "Sum", "Values", A3:A11)`
 
-After clicking on *Calculate SDFs button*, the module returns the sum. It behaves as expected - it updates the sum correctly - if we change the size of the range of input values.
+After clicking on *Calculate SDFs* button, the module returns the sum. It behaves as expected - it updates the sum correctly if we change the size of the range of input values.
 
-Outputs can be spilled ranges as well. Let's suppose we would like to have another output from this module - for each input value, the module should return a difference between this value and the average of all input values. 
+Outputs can be spilled ranges as well. Let's suppose we would like to have another output from this module - for each input value, the module should return a difference between specific value and the average of all input values. 
 
 Firstly, we need a formula to calculate average of all input values:
 
@@ -187,3 +187,4 @@ Our use of "Stats" module finally looks like:
 
 ![Projectile model](/images/projectile12.png)
 
+Besides spill ranges, we can use array formulas, too. In this case, we have to predict in advance the maximum size of the input and output arrays, and enter the ModuleInput() and ModuleOutput() functions as array formulas.
