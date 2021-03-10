@@ -111,7 +111,7 @@ For the calculation to be performed, we click on *Calculate SDFs* button on *She
 
 ![Projectile model](/images/projectile6.png)
 
-We can use the module many times. Suppose that we need to estimate projectile trajectory for the first 5 seconds, in 0.5 seconds intervals. For simplicity, we can copy input values to cells below, where we increment the time parameter by 0.5. Formulas with module calls can be copied from cells F1 and G1, too. After copying and clicking on *Calculate SDFs*, we get:
+We can use the module many times, in other words it can be referenced by many ModuleUse() functions. Suppose that we need to estimate projectile trajectory for the first 5 seconds, in 0.5 seconds intervals. For simplicity, we can copy input values to cells below the first row, where we increment the time parameter by 0.5. Formulas with module calls can be copied from cells F1 and G1, too. After copying and clicking on *Calculate SDFs*, we get:
 
 ![Projectile model](/images/projectile7.png)
 
