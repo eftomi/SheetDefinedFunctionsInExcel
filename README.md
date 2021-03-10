@@ -151,7 +151,7 @@ Let's put the sum of input values in cell B1. Since this is also the output from
 
 The module "Stats" is prepared, and we can use it from some other worksheet. In the worksheet in the picture below, we have entered input values in cells A3..A11. 
 
-![Projectile model](/images/projectile11.png)
+![Projectile model](/images/projectile10.png)
 
 We called the module with formula in cell B2:
 
