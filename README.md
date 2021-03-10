@@ -97,9 +97,10 @@ We can use as many input arguments as needed by our module.
 
 In our case, we of course need two results, distance and altitude, so we have two ModuleUse() functions. We can enter them in cells F2 and G2:
 
-`=ModuleUse("Projectile", "Distance", "Initial speed", A2, "Initial angle", B2, "Initial altitude", C2, "Time", D2)`
-
-`=ModuleUse("Projectile", "Altitude", "Initial speed", A2, "Initial angle", B2, "Initial altitude", C2, "Time", D2)`
+```
+=ModuleUse("Projectile", "Distance", "Initial speed", A2, "Initial angle", B2, "Initial altitude", C2, "Time", D2)
+=ModuleUse("Projectile", "Altitude", "Initial speed", A2, "Initial angle", B2, "Initial altitude", C2, "Time", D2)
+```
 
 Since we wrote input and output names in cells A1..D1 and F1..G1 exactly as defined by module, we can use cell references in ModuleUse() like this:
 
