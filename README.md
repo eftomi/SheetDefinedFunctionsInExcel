@@ -2,7 +2,7 @@
 
 ### Sheet Defined Functions in MS Excel
 
-#### If you developed a model in Excel spreadsheet and would like to expose it as a function to be used in other parts of the same workbook or in other workbooks, this add-in can help you. 
+#### If you developed a model in Excel spreadsheet and would like to expose it as independent module to be used in other parts of the same workbook or in other workbooks, this add-in can help you. 
 
 Instead of coding a VBA function or constructing a complex lambda expression, you can develop your function as a spreadsheet model in a usual way by putting expressions in cells. After your model is developed with all the complexities, this add-in allows you to specify its inputs and outputs. By doing that, your model can be regarded as a "black box" - once developed and exposed as a sheet defined function, you will have no concerns about its inner workings and internal structure, you just use the results that are returned from it. In this way, you won't have to use any direct references into the model structure, nor the model should reference any cells outside of it.
 
