@@ -2,7 +2,7 @@
 
 Add-in can be downloaded from [here](/src/SheetDefinedFunctions.xlam).
 
-Place it in the Excel add-ins folder (usually C:\Users\<username>\AppData\Roaming\Microsoft\AddIns). 
+Place it in the Excel add-ins folder (usually C:\Users\username\AppData\Roaming\Microsoft\AddIns). 
 
 To activate SDF add-in:
 
