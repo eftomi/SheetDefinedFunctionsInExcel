@@ -20,6 +20,6 @@ Installation:
 
 Documentation:
 * [How to use SDF Add-In](/docs/Usage.md)
-* [For developers](/docs/Developers.md)
+* [Information for developers](/docs/Developers.md)
 
 
