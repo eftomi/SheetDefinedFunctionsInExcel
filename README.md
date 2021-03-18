@@ -10,7 +10,7 @@ In this way, you won't have to use any direct references into the model structur
 
 In this way, you can create and use many sheet defined functions simultaneously. They can be defined in one workbook and used in the same or in other workbooks. 
 
-Functionalities:
+*Functionalities:*
 * Expose your spreadsheet model (e. g. Excel range, group of sheets, entire workbook) as a sheet defined function
 * Use it from elsewhere without creating cell or range references directly to it
 * Send input data and receive the results as values, value arrays and spills
