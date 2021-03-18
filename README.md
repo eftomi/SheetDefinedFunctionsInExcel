@@ -15,6 +15,10 @@ Functionalities:
 * use it from elsewhere without creating cell or range references directly to it
 * send input data and receive the results as values, value arrays and spills
 
+Installation:
+* [Download and install SDF add-in](/docs/Install.md)
+
+Documentation:
 * [How to use SDF Add-In](/docs/Usage.md)
 * [For developers](/docs/Developers.md)
 
