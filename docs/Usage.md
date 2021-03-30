@@ -12,15 +12,17 @@ To expose the model as a sheet-defined function (SDF), we use two special worksh
 
 Each ModuleInput() function creates one "input slot" for the SDF. The cell with this function (within the model that we would like to expose as SDF) will take and display input values that we send to SDF when it will be called from outside. Besides this, ModuleInput() specifies the name of the SDF (for our example we'll use the name "Projectile"), the range of cells where the structure of the SDF is defined (ours is defined in range A2:B8 for now), the name of the input (e.g. "Initial speed"), and input's initial value (e.g. 130 m/s) - like this:
 
-`=ModuleInput("Projectile", A2:C8, "Initial speed", 130)`
+`=ModuleInput("Projectile", A2:B8, "Initial speed", 130)`
 
-ModuleOutput() function declares the output by its name (e.g. "Distance") and the value that should be considered as the result (formula or cell reference, e.g. B7). We also have to declare the SDF that this output belongs to ("Projectile").
+ModuleOutput() function declares the output by its name (e.g. "Distance") and the value that should be considered as the result (formula or cell reference, e.g. B7). We also have to declare the SDF that this output belongs to ("Projectile"):
+
+`=ModuleOutput("Projectile", "Distance", B7)`
 
 SDF names in ModuleInput() and ModuleOutput() functions serve two purposes: (1) they uniquely define a SDF, and (2) they tie named inputs and outputs to this SDF.
 
-For each SDF, we can use one or more inputs (i.e. ModuleInput() functions) and one or more outputs (i.e. ModuleOutput() functions). Our SDF "Projectile" will thus have four inputs and two outputs.
+For each SDF, we can use one or more inputs (i.e. ModuleInput() functions) and one or more outputs (i.e. ModuleOutput() functions). Our SDF "Projectile" will thus have four inputs and two outputs. 
 
-### SDF inputs
+### More about SDF inputs
 
 Our "projectile" model takes four arguments - initial speed, angle and altitude, and the time after lounch for which we are estimating the position of the projectile. We declare each of the four inputs with function ModuleInput() which looks like:
 
@@ -46,7 +48,7 @@ Our SDF will thus be called "Projectile", its structure and formulas are defined
 
 As it can be seen from the picture above, we used absolute references for SDF range $A$2:$C$8 to simplify copying the formula from cell B2 to cells B3..B5. Since we have SDF argument names (initial speed, initial angle ...) already nicely written in cells A2..A5, we used references to these cells as the third argument to ModuleInput() functions. 
 
-**In this way, we defined SDF "Projectile" with four input "slots" - in other words, cells B2 to B5 will take input parameters when the SDF will be used. This is important since the body of our SDF (formulas which calculate distance in altitude) should use (reference) these input values.**
+In this way, we defined SDF "Projectile" with four input "slots" - in other words, cells B2 to B5 will take input parameters when the SDF will be used. This is important since the body of our SDF (formulas which calculate distance in altitude) should use (reference) these input values.
 
 ### SDF outputs
 
