@@ -2,7 +2,7 @@
 
 ## How to use SDF Add-In
 
-Let's develop a model which estimates the position (destination and altitude) of a projectile after it has been lounched with a certain speed at a certain angle (Source: https://en.wikipedia.org/wiki/Projectile_motion). Besides speed and angle, we also need time elapsed after lounch, and the initial altitude.
+Let's develop a model which estimates the position (destination and altitude) of a projectile after it has been lounched with a certain speed at a certain angle (Source: https://en.wikipedia.org/wiki/Projectile_motion). Besides speed and angle, we also need time elapsed after lounch, and the initial altitude. 
 
 ![Projectile model](/images/projectile1.png)
 
@@ -10,7 +10,7 @@ We have input values in cells B2 to B5, and projectile motion formulas in cells 
 
 To do that, we can expose the model as a sheet-defined function (SDF) with two special worksheet functions which are a part of SDF add-in functionality: ModuleInput() and ModuleOutput(). 
 
-When used in a spreadsheet cell, each ModuleInput() function creates one "input slot" for the module, i.e. a cell that will take input values from module calls. Besides this, ModuleInput() specifies the name of the module (for our example we'll use the module name "Projectile"), the range of cells where the structure of the module is defined (ours is defined in range A2:B8 for now), the name of the input (e.g. "Initial speed"), and input's initial value (e.g. 130 m/s).
+Each function ModuleInput() function creates one "input slot" for the SDF. The cell with this function (within the model that we would like to expose as SDF) will take and display input values that we send to SDF when called from outside. Besides this, ModuleInput() specifies the name of the module (for our example we'll use the module name "Projectile"), the range of cells where the structure of the module is defined (ours is defined in range A2:B8 for now), the name of the input (e.g. "Initial speed"), and input's initial value (e.g. 130 m/s).
 
 ModuleOutput() function declares the name of the output (e.g. "Distance"), the value that should be considered as the result (formula or cell reference, e.g. B7). We also have to reference the proper module by its name ("Projectile").
 
