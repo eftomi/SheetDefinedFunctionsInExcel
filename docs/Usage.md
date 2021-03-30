@@ -6,9 +6,11 @@ Let's develop a model which estimates the position (destination and altitude) of
 
 ![Projectile model](/images/projectile1.png)
 
-We have input values in cells B2 to B5, and projectile motion formulas in cells B7 and B8. We would like to use this model in other workbooks, but just its calculation "service" and not the actual structure by itself. In this way, we won't have to use any direct references into the model structure, nor the model should reference any cells outside of it. To do that, we can expose the model as a sheet defined function with two special worksheet functions which are a part of SDF add-in functionality: ModuleInput() and ModuleOutput(). We use these two functions within the model that should be exposed as a sheet defined function.
+We have input values in cells B2 to B5, and projectile motion formulas in cells B7 and B8. We would like to use this model in other workbooks, but just its calculation "service" and not the actual structure by itself. In this way, we won't have to use any direct references into the model structure, nor the model should reference any cells outside of it. 
 
-When used in a spreadsheet cell, each ModuleInput() function creates one "input slot" for the module, i.e. a cell that will take input values from module calls. Besides this, it specifies the name of the module (for our example we'll use the module name "Projectile"), the range of cells where the structure of the module is defined (ours is defined in range A2:B8 for now), the name of the input (e.g. "Initial speed"), and input's initial value (e.g. 130 m/s).
+To do that, we can expose the model as a sheet-defined function (SDF) with two special worksheet functions which are a part of SDF add-in functionality: ModuleInput() and ModuleOutput(). 
+
+When used in a spreadsheet cell, each ModuleInput() function creates one "input slot" for the module, i.e. a cell that will take input values from module calls. Besides this, ModuleInput() specifies the name of the module (for our example we'll use the module name "Projectile"), the range of cells where the structure of the module is defined (ours is defined in range A2:B8 for now), the name of the input (e.g. "Initial speed"), and input's initial value (e.g. 130 m/s).
 
 ModuleOutput() function declares the name of the output (e.g. "Distance"), the value that should be considered as the result (formula or cell reference, e.g. B7). We also have to reference the proper module by its name ("Projectile").
 
