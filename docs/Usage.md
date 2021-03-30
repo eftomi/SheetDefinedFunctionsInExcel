@@ -6,13 +6,13 @@ Let's develop a model which estimates the position (destination and altitude) of
 
 ![Projectile model](/images/projectile1.png)
 
-We have input values in cells B2 to B5, and projectile motion formulas in cells B7 and B8. We would like to use this model in other workbooks, but just its calculation "service" and not the actual structure by itself. In this way, we won't have to use any direct references into the model structure, nor the model should reference any cells outside of it. Input values of our model are cells B2 to B5, and outputs (results) are cells B7 and B8.
+We have input values in cells B2 to B5, and projectile motion formulas in cells B7 and B8. We would like to use this model in other workbooks, but just its calculation "service" and not the actual structure by itself. In this way, we won't have to use any direct references into the model structure, nor the model should reference any cells outside of it. Inputs of our model are represented by cells B2 to B5, and outputs (results) by cells B7 and B8.
 
 To expose the model as a sheet-defined function (SDF), we use two special worksheet functions that are a part of SDF add-in functionality: ModuleInput() and ModuleOutput().
 
-Each function ModuleInput() function creates one "input slot" for the SDF. The cell with this function (within the model that we would like to expose as SDF) will take and display input values that we send to SDF when called from outside. Besides this, ModuleInput() specifies the name of the module (for our example we'll use the module name "Projectile"), the range of cells where the structure of the module is defined (ours is defined in range A2:B8 for now), the name of the input (e.g. "Initial speed"), and input's initial value (e.g. 130 m/s).
+Each ModuleInput() function creates one "input slot" for the SDF. The cell with this function (within the model that we would like to expose as SDF) will take and display input values that we send to SDF when it will be called from outside. Besides this, ModuleInput() specifies the name of the SDF (for our example we'll use the name "Projectile"), the range of cells where the structure of the SDF is defined (ours is defined in range A2:B8 for now), the name of the input (e.g. "Initial speed"), and input's initial value (e.g. 130 m/s).
 
-ModuleOutput() function declares the name of the output (e.g. "Distance"), the value that should be considered as the result (formula or cell reference, e.g. B7). We also have to reference the proper module by its name ("Projectile").
+ModuleOutput() function declares the output by its name (e.g. "Distance") and the value that should be considered as the result (formula or cell reference, e.g. B7). We also have to declare the SDF that this output belongs to ("Projectile").
 
 Module names in ModuleInput() and ModuleOutput() functions serve two purposes: (1) they uniquely define a module, and (2) they tie named inputs and outputs to this module.
 
