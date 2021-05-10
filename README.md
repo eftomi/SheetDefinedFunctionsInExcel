@@ -1,6 +1,6 @@
-# SDF Add-In
+# SDFunc
 
-### Sheet-Defined Functions in MS Excel
+### Add-in for Sheet-Defined Functions in MS Excel
 
 #### If you developed a model in Excel spreadsheet and would like to expose it as a function to be used in other parts of the same workbook or in other workbooks, this add-in can help you. 
 
