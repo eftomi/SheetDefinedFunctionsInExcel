@@ -102,7 +102,7 @@ In our case, we of course need two results, distance and altitude, so we have tw
 
 Since we wrote input and output names in cells A1..D1 and F1..G1 exactly as defined by SDF, we can use cell references in ModuleUse() like this:
 
-![Projectile model](/images/projectile6.png)
+![Projectile model](/images/projectile5.png)
 
 For the calculation to be performed, we click on *Calculate SDFs* button on *Sheet Defined Functions* ribbon.
 
