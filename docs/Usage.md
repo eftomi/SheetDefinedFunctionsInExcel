@@ -6,11 +6,11 @@ Let's develop a model which estimates the position (destination and altitude) of
 
 ![Projectile model](/images/projectile1.png)
 
-Let's arrange input values in cells B2 to B5, and projectile motion formulas in cells B7 and B8 as above. We would like to use this model in other workbooks, but just its calculation "service" and not the actual structure by itself, so that we could write a formula to do the calculation in an easy way, just by calling one function instead of copying the whole calculation block from cells A2 to B8. In this way, we won't have to use any direct references into the model structure (its outputs), nor the model should reference any cells outside of it. 
+Let's arrange input values in cells B2 to B5, and projectile motion formulas in cells B7 and B8 as above. We would like to use this model in other workbooks, but just its calculation "service" and not the actual structure by itself, so that we could write a formula to do the calculation in an easy way, just by calling one function instead of copying the whole calculation block from cells A2 to B8. In this way, we won't have to use any direct references into the model structure (its outputs), nor the model should reference any cells outside of it. SDFs enable the modularization of workbooks, that is the separation of the functionalities into independent, interchangeable modules, such that each contains everything necessary to compute a particular aspect of the desired functionality. 
 
 As we see, the inputs of our model are represented by cells B2 to B5 (input parameter values), and outputs (results) of our module are the cells B7 and B8.
 
-To expose the model as a sheet-defined function (SDF), we use two special worksheet functions that are a part of SDF add-in functionality: ModuleInput() and ModuleOutput(). SDFs enable the modularization of workbooks, that is the separation of the functionalities into independent, interchangeable modules, such that each contains everything necessary to compute a particular aspect of the desired functionality. 
+To expose the model as a sheet-defined function (SDF), we use two special worksheet functions that are a part of SDF add-in functionality: ModuleInput() and ModuleOutput(). 
 
 Each ModuleInput() function creates one "input slot" for the SDF. The cell with this function (within the model that we would like to expose as SDF) will take and display input values that we send to SDF when it will be called from outside. Besides this, ModuleInput() specifies the name of the SDF (for our example we'll use the name "Projectile"), the name of the input (e.g. "Initial speed"), and input's initial value (e.g. 130 m/s) - like this:
 
