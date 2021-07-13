@@ -1,6 +1,6 @@
 ## Download and install SDF Add-In
 
-Add-in can be downloaded from [here](/xlam/SheetDefinedFunctions.xlam).
+Add-in can be downloaded from [here](https://github.com/eftomi/SheetDefinedFunctionsInExcel/tree/main/xlam).
 
 Place it in the Excel add-ins folder (usually C:\Users\\\<username\>\AppData\Roaming\Microsoft\AddIns). 
 
