@@ -6,7 +6,7 @@ Let's develop a model which estimates the position (destination and altitude) of
 
 ![Projectile model](/images/projectile1.png)
 
-Let's arrange input values in cells B2 to B5, and projectile motion formulas in cells B7 and B8 as above. We would like to use this model in other workbooks, but just its calculation "service" and not the actual structure by itself, so that we could write formulas like *calculate Distance in module Projectile using these and these parameters* instead of copying the whole calculation block. In this way, we won't have to use any direct references into the model structure, nor the model should reference any cells outside of it. 
+Let's arrange input values in cells B2 to B5, and projectile motion formulas in cells B7 and B8 as above. We would like to use this model in other workbooks, but just its calculation "service" and not the actual structure by itself, so that we could write a formula to do the calculation in an easy way, just by calling one function instead of copying the whole calculation block from cells A2 to B8. In this way, we won't have to use any direct references into the model structure (its outputs), nor the model should reference any cells outside of it. 
 
 As we see, the inputs of our model are represented by cells B2 to B5 (input parameter values), and outputs (results) of our module are the cells B7 and B8.
 
@@ -115,7 +115,7 @@ For the calculation to be performed, we click on *Calculate SDFs* button on *She
 ![Projectile model](/images/calculateSDFs.png)
 
 ![Projectile model](/images/projectile6.png)
-
+ 
 We can use the SDF many times, in other words it can be referenced by many ModuleUse() functions. Suppose that we need to estimate projectile trajectory for the first 5 seconds, in 0.5 seconds intervals. For simplicity, we can copy input values to cells below the first row, where we increment the time parameter by 0.5. Formulas with SDF calls can be copied from cells F1 and G1, too. After copying and clicking on *Calculate SDFs*, we get:
 
 ![Projectile model](/images/projectile7.png)
