@@ -120,7 +120,11 @@ We can use the SDF many times, in other words it can be referenced by many Modul
 
 ![Projectile model](/images/projectile7.png)
 
-If we order input parameters and their names in rows or columns, we can instead use ModuleUseRangeInputs() function to call the SDF, which is more convenient:
+To get the overview of all SDFs and their arguments, we can click Use SDFs button on the toolbar, which brings a dialog box with which we can construct the ModuleUse() formula:
+
+![Projectile model](/images/dialogBox.png)
+
+Sometimes it is convenient to arrange input parameters and their names in rows or columns. In such a case, we can use ModuleUseRangeInputs() function to call the SDF, which is more convenient:
 
 `=ModuleUseRangeInputs(module_name, output_name, input_names, input_values)`
 
@@ -139,13 +143,13 @@ SDF add-in supports spill ranges. SDF inputs and outputs can be arrays, not just
 
 In a new worksheet, we'll arrange values that have to be summed up in a column, starting from cell A5 and down. This column will represent the SDF input, so we declare it with the formula in cell A5 like:
 
-`=ModuleInput("Stats", A1:B20, "Values", {1, 2, 3})`
+`=ModuleInput("Stats", "Values", {1, 2, 3})`
 
-"Stats" is our new SDF, A1:B20 is the range of cells with the module structure, "Values" is the name of this input, and array {1, 2, 3} is the initial array to be summed up. After entering the formula, the array {1, 2, 3} should be spilled in cells A5..A7.
+"Stats" is our new SDF, "Values" is the name of this input, and array {1, 2, 3} is the initial array to be summed up. After entering the formula, the array {1, 2, 3} should be spilled in cells A5..A7.
 
-Let's put the sum of input values in cell B1. Since this is also the output from our SDF, we can declare it with a formula like:
+Let's put the sum of input values in cell B1. This is also the output from our SDF, so we can declare it with a formula like:
 
-`=ModuleOutput("Stats", "Sum", SUM(A5#))`
+`=ModuleOutput("Stats", SUM(A5#), "Sum")`
 
 "Sum" is the name of the output, and return value will be the sum of spill range which begins by the A5 cell. Our SDF structure is not complicated at all:
 
@@ -160,6 +164,18 @@ We call the SDF with formula in cell B2:
 `=ModuleUse("Stats", "Sum", "Values", A3:A11)`
 
 After clicking on *Calculate SDFs* button, the SDF returns the sum. It behaves as expected - it updates the sum correctly if we change the size of the range of input values.
+
+Because the "Stats" SDF has only one input and only one output, they can be "anonymous", without names. Thus, instead of the above functions, we could declare:
+
+`=ModuleInput("Stats",, {1, 2, 3})`
+
+and
+
+`=ModuleOutput("Stats", SUM(A5#))`
+
+We would then call the function as in:
+
+`=ModuleUse("Stats",, A3:A11)`
 
 Outputs can be spilled ranges as well. Let's suppose we would like to have another output from this SDF - for each input value, the module should return a difference between specific value and the average of all input values. 
 
