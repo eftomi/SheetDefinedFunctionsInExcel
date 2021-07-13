@@ -2,19 +2,23 @@
 
 ## How to use SDF Add-In
 
-Let's develop a model which estimates the position (destination and altitude) of a projectile after it has been lounched with a certain speed at a certain angle (Source: https://en.wikipedia.org/wiki/Projectile_motion). Besides speed and angle, we also need time elapsed after lounch, and the initial altitude. 
+Let's develop a model which estimates the position (destination and altitude) of a projectile after it has been lounched with a certain speed at a certain angle (Source: https://en.wikipedia.org/wiki/Projectile_motion). Besides speed and angle, we will also need the time that elapsed after lounch, and the initial altitude. 
 
 ![Projectile model](/images/projectile1.png)
 
-We have input values in cells B2 to B5, and projectile motion formulas in cells B7 and B8. We would like to use this model in other workbooks, but just its calculation "service" and not the actual structure by itself. In this way, we won't have to use any direct references into the model structure, nor the model should reference any cells outside of it. Inputs of our model are represented by cells B2 to B5, and outputs (results) by cells B7 and B8.
+Let's arrange input values in cells B2 to B5, and projectile motion formulas in cells B7 and B8 as above. We would like to use this model in other workbooks, but just its calculation "service" and not the actual structure by itself, so that we could write formulas like *calculate Distance in module Projectile using these and these parameters* instead of copying the whole calculation block.
 
-To expose the model as a sheet-defined function (SDF), we use two special worksheet functions that are a part of SDF add-in functionality: ModuleInput() and ModuleOutput(). SDFs enable the modularization of workbooks, that is separating the functionalities into independent, interchangeable modules, such that each contains everything necessary to compute only one aspect of the desired functionality. 
+In this way, we won't have to use any direct references into the model structure, nor the model should reference any cells outside of it. 
 
-Each ModuleInput() function creates one "input slot" for the SDF. The cell with this function (within the model that we would like to expose as SDF) will take and display input values that we send to SDF when it will be called from outside. Besides this, ModuleInput() specifies the name of the SDF (for our example we'll use the name "Projectile"), the range of cells where the structure of the SDF is defined (ours is defined in range A2:B8 for now), the name of the input (e.g. "Initial speed"), and input's initial value (e.g. 130 m/s) - like this:
+As we see, the inputs of our model are represented by cells B2 to B5 (input parameter values), and outputs (results) of our module are the cells B7 and B8.
 
-`=ModuleInput("Projectile", A2:B8, "Initial speed", 130)`
+To expose the model as a sheet-defined function (SDF), we use two special worksheet functions that are a part of SDF add-in functionality: ModuleInput() and ModuleOutput(). SDFs enable the modularization of workbooks, that is the separation of the functionalities into independent, interchangeable modules, such that each contains everything necessary to compute a particular aspect of the desired functionality. 
 
-ModuleOutput() function declares the output by its name (e.g. "Distance") and the value that should be considered as the result (formula or cell reference, e.g. B7). We also have to declare the SDF that this output belongs to ("Projectile"):
+Each ModuleInput() function creates one "input slot" for the SDF. The cell with this function (within the model that we would like to expose as SDF) will take and display input values that we send to SDF when it will be called from outside. Besides this, ModuleInput() specifies the name of the SDF (for our example we'll use the name "Projectile"), the name of the input (e.g. "Initial speed"), and input's initial value (e.g. 130 m/s) - like this:
+
+`=ModuleInput("Projectile", "Initial speed", 130)`
+
+ModuleOutput() function declares the module output by its name (e.g. "Distance") and the value that should be considered as the result (formula or cell reference, e.g. B7). We also have to declare the SDF that this output belongs to ("Projectile"):
 
 `=ModuleOutput("Projectile", "Distance", B7)`
 
