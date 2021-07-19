@@ -12,5 +12,5 @@ Option Explicit
 
 Public Name As String
 Public Value As Variant
-
+Public ModuleRangeInput As Range
 

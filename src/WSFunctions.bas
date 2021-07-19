@@ -3,24 +3,29 @@ Option Explicit
 
 Public AllModules As New objModules         'placeholder for all module objects
 
-Public Function ModuleInput(ModuleName As String, ModuleRange As Range, inputName As String, InitialValue As Variant, Optional UseMyInputValues = False) As Variant
+Public Function ModuleInput(ModuleName As String, Optional InputName As String = "_default", Optional InitialValue As Variant = 0, Optional EnforceMyInputValues = False) As Variant
+Attribute ModuleInput.VB_Description = "Used to define one module input - a cell with this function will receive an argument value from a module call during model execution. You must declare input's name if a module has two or more inputs."
+Attribute ModuleInput.VB_ProcData.VB_Invoke_Func = " \n20"
 'Used to define specific module input.
-'ModuleRange is used for partial evaluation/recalculation of particular module, without influencing other parts of workbook, including other uses of the same module
 
     Dim mdl As objModule
     Dim inpt As objInput
     
     Set mdl = GetOrCreateModule(ModuleName)
     
-    Set mdl.ModuleRange = ModuleRange
-    
-    Set inpt = mdl.ModuleInputs.item(inputName)
+    Set inpt = mdl.ModuleInputs.item(InputName)
     If inpt Is Nothing Then
-        Set inpt = mdl.ModuleInputs.Add(inputName)
+        Set inpt = mdl.ModuleInputs.Add(InputName)
         inpt.Value = InitialValue
     End If
     
-    If UseMyInputValues Then
+    If TypeName(Application.Caller) = "Range" Then
+        Set inpt.ModuleRangeInput = Application.Caller
+    Else
+        ModuleInput = CVErr(xlErrNA)
+    End If
+    
+    If EnforceMyInputValues Then
         inpt.Value = InitialValue
         ModuleInput = inpt.Value
     Else
@@ -28,7 +33,9 @@ Public Function ModuleInput(ModuleName As String, ModuleRange As Range, inputNam
     End If
 End Function
 
-Public Function ModuleOutput(ModuleName As String, OutputName As String, FormulaDefinition As Variant) As Variant
+Public Function ModuleOutput(ModuleName As String, FormulaDefinition As Variant, Optional OutputName As String = "_default") As Variant
+Attribute ModuleOutput.VB_Description = "Used to define one module output - a cell with this function will send the result of the module to the module call during model execution. You must declare output's name if a module has two or more outputs."
+Attribute ModuleOutput.VB_ProcData.VB_Invoke_Func = " \n20"
 'Used to define specific module output.
     Dim mdl As objModule
     Dim outp As objOutput
@@ -41,17 +48,26 @@ Public Function ModuleOutput(ModuleName As String, OutputName As String, Formula
     End If
     
     outp.Value = FormulaDefinition
+    If TypeName(Application.Caller) = "Range" Then
+        Set outp.ModuleRangeOutput = Application.Caller
+    Else
+        ModuleOutput = CVErr(xlErrNA)
+    End If
     ModuleOutput = outp.Value
 End Function
 
-Public Function ModuleUse(ModuleName As String, OutputName As String, ParamArray Inputs() As Variant) As Variant
+
+Public Function ModuleUse(ModuleName As String, ParamArray OutputNameAndInputs() As Variant) As Variant
+Attribute ModuleUse.VB_Description = "Performs a module call. Module body should be defined beforehand by at least one ModuleOutput() function, and one or more ModuleInput() if it accepts input arguments."
+Attribute ModuleUse.VB_ProcData.VB_Invoke_Func = " \n20"
 'Used to issue a module call, requesting the named output, and setting all the required module inputs
 'Each inputs is a pair of name, value optional parameters, as required by module
     Dim mdl As objModule
     Dim inpt As objInput
     Dim inptI As Integer
-    Dim inputName As Variant
-    Dim inputValue As Variant
+    Dim InputName As Variant
+    Dim InputValue As Variant
+    Dim OutputName As Variant
     
     Dim outp As objOutput
     
@@ -61,20 +77,62 @@ Public Function ModuleUse(ModuleName As String, OutputName As String, ParamArray
     
     Set mdl = GetOrCreateModule(ModuleName)
     
-    For inptI = LBound(Inputs) To UBound(Inputs) Step 2
-        If VarType(Inputs(inptI)) = vbString Then
-            inputName = Inputs(inptI)
-            inputValue = Inputs(inptI + 1)
-            
-            Set inpt = mdl.ModuleInputs.item(inputName)
-            If Not inpt Is Nothing Then
-                inpt.Value = inputValue
-            End If
+    If UBound(OutputNameAndInputs) = -1 Then            'call with =ModuleUse("myModule")
+        OutputName = "_default"
+    ElseIf UBound(OutputNameAndInputs) = 0 Then         'call with =ModuleUse("myModule", "myOutput")
+        OutputName = OutputNameAndInputs(0)
+    ElseIf UBound(OutputNameAndInputs) = 1 Then
+        If IsMissing(OutputNameAndInputs(0)) Then
+            OutputName = "_default"
         Else
-            ModuleUse = CVErr(xlErrValue)
-            Exit Function
+            OutputName = OutputNameAndInputs(0)
         End If
-    Next
+        
+        InputName = "_default"
+        InputValue = OutputNameAndInputs(1)
+        
+        Set inpt = mdl.ModuleInputs.item(InputName)
+        If Not inpt Is Nothing Then
+            inpt.Value = InputValue
+        End If
+    ElseIf UBound(OutputNameAndInputs) = 2 And IsMissing(OutputNameAndInputs(1)) Then   'call with =ModuleUse("myModule", , , A1:A4)
+        If IsMissing(OutputNameAndInputs(0)) Then
+            OutputName = "_default"
+        Else
+            OutputName = OutputNameAndInputs(0)
+        End If
+        
+        InputName = "_default"
+        InputValue = OutputNameAndInputs(2)
+        
+        Set inpt = mdl.ModuleInputs.item(InputName)
+        If Not inpt Is Nothing Then
+            inpt.Value = InputValue
+        End If
+    ElseIf UBound(OutputNameAndInputs) Mod 2 = 0 Then   'call with =ModuleUse("myModule", , "InputData1", A1:A4, "InputData2", B1:B4)
+        If IsMissing(OutputNameAndInputs(0)) Then
+            OutputName = "_default"
+        Else
+            OutputName = OutputNameAndInputs(0)
+        End If
+        For inptI = 1 To UBound(OutputNameAndInputs) Step 2
+            If VarType(OutputNameAndInputs(inptI)) = vbString Then
+                InputName = OutputNameAndInputs(inptI)
+                InputValue = OutputNameAndInputs(inptI + 1)
+            
+                Set inpt = mdl.ModuleInputs.item(InputName)
+                If Not inpt Is Nothing Then
+                    inpt.Value = InputValue
+                End If
+            Else
+                ModuleUse = CVErr(xlErrValue)
+                Exit Function
+            End If
+        Next
+    Else
+        ModuleUse = CVErr(xlErrValue)
+        Exit Function
+    End If
     
     If TypeName(Application.Caller) = "Range" Then
         Set ourCaller = Application.Caller
@@ -87,7 +145,7 @@ Public Function ModuleUse(ModuleName As String, OutputName As String, ParamArray
         End If
         Set mdlu.SourceCells = ourCaller
     End If
-        
+    
     Set outp = mdl.ModuleOutputs.item(OutputName)
     If Not outp Is Nothing Then
         ModuleUse = outp.Value
@@ -96,15 +154,16 @@ Public Function ModuleUse(ModuleName As String, OutputName As String, ParamArray
     End If
 End Function
 
-
 Public Function ModuleUseRangeInputs(ModuleName As String, OutputName As String, InputNames As Range, InputValues As Range) As Variant
+Attribute ModuleUseRangeInputs.VB_Description = "Performs a module call. Module body should be defined beforehand by at least one ModuleOutput() function, and one or more ModuleInput() if it accepts input arguments."
+Attribute ModuleUseRangeInputs.VB_ProcData.VB_Invoke_Func = " \n20"
 'Used to issue a module call, requesting the named output, and setting all the required module inputs
 'Inputs are defined as two ranges - a range of names and a range of values
     Dim mdl As objModule
     Dim inpt As objInput
     Dim inptI As Integer
-    Dim inputName As Variant
-    Dim inputValue As Variant
+    Dim InputName As Variant
+    Dim InputValue As Variant
     
     Dim outp As objOutput
     
@@ -116,12 +175,12 @@ Public Function ModuleUseRangeInputs(ModuleName As String, OutputName As String,
     
     For inptI = 1 To InputNames.Count
         If VarType(InputNames(inptI)) = vbString Then
-            inputName = InputNames(inptI)
-            inputValue = InputValues(inptI)
+            InputName = InputNames(inptI)
+            InputValue = InputValues(inptI)
             
-            Set inpt = mdl.ModuleInputs.item(inputName)
+            Set inpt = mdl.ModuleInputs.item(InputName)
             If Not inpt Is Nothing Then
-                inpt.Value = inputValue
+                inpt.Value = InputValue
             End If
         Else
             ModuleUseRangeInputs = CVErr(xlErrValue)

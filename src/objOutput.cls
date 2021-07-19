@@ -12,4 +12,5 @@ Option Explicit
 
 Public Name As String
 Public Value As Variant
+Public ModuleRangeOutput As Range
 

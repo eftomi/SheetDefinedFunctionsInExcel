@@ -5,7 +5,14 @@ Sub rxCalculateSDFs_onAction(control As IRibbonControl)
     Recalculation.RecalculateModules
 End Sub
 
-Sub rxListAllSDFs_onAction(control As IRibbonControl)
-    ListAllSDFs
+Sub rxUseSDFs_onAction(control As IRibbonControl)
+    InsertSDF
+End Sub
+
+Private Sub InsertSDF()
+    Dim frmISDF As frmInsertSDF
+    
+    Set frmISDF = New frmInsertSDF
+    frmISDF.Show
 End Sub
 

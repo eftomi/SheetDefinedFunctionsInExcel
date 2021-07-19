@@ -14,7 +14,7 @@ Public Name As String
 Public ModuleInputs As objInputs
 Public ModuleOutputs As objOutputs
 Public ModuleUses As objModuleUses
-Public ModuleRange As Range
+
 
 Private Sub Class_Initialize()
     Set ModuleInputs = New objInputs
