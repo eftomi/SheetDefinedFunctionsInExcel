@@ -39,6 +39,7 @@ When the end user initiates SDF recalculation from the ribbon, the RecalculateMo
 
 #### References
 
+* Turk, T., 2021. SDFunc: Modular spreadsheet design with sheet defined functions in Microsoft Excel. Software: Practice and Experience, spe.3027. https://doi.org/10.1002/spe.3027
 * Jones, S.P., Blackwell, A., Burnett, M., 2003. A User-Centred Approach to Functions in Excel. SIGPLAN Not. 38, 165–176. https://doi.org/10.1145/944746.944721
 * Sestoft, P., Sørensen, J.Z., 2013. Sheet-Defined Functions: Implementation and Initial Evaluation, in: Dittrich, Y., Burnett, M., Mørch, A., Redmiles, D. (Eds.), End-User Development. Springer Berlin Heidelberg, Berlin, Heidelberg, pp. 88–103.
 * Excel Recalculation, 2018. https://docs.microsoft.com/en-us/office/client-developer/excel/excel-recalculation
